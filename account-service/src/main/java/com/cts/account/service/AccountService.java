@@ -27,11 +27,10 @@ public class AccountService {
                 throw new RuntimeException("User not found with ID: " + account.getUserID());
             }
         }
-        //cheking if user have already bank account or not
+
         if (account.getUserID() != null && accountRepository.existsByUserID(account.getUserID())) {
-        	throw new DuplicateAccountException("User already has a bank account. "); 
-        
-        
+            throw new DuplicateAccountException(
+                    "User already has a bank account. Each user can have only one account.");
         }
 
         if (account.getStatus() == null || account.getStatus().isBlank()) {
